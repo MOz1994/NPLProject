@@ -41,9 +41,6 @@ app.get('/key', sendKey);
 
 function sendKey(req, res) {
     res.send(pdata);
-    console.log('eeeeeh')
-
-
 
 }
 // Callback function to complete GET '/all'
@@ -68,32 +65,3 @@ function addFeel(req, res) {
     projectData.push(newEnrty);
     res.send(projectData);
 };
-// var https = require('follow-redirects').https;
-// var fs = require('fs');
-
-// var options = {
-//     'method': 'POST',
-//     'hostname': 'api.meaningcloud.com',
-//     'path': '/sentiment-2.1?key=c52beb1bb84d33fce045fa1c7b385334&lang=en&txt=love.&model=general',
-//     'headers': {},
-//     'maxRedirects': 20
-// };
-
-// var req = https.request(options, function(res) {
-//     var chunks = [];
-
-//     res.on("data", function(chunk) {
-//         chunks.push(chunk);
-//     });
-
-//     res.on("end", function(chunk) {
-//         var body = Buffer.concat(chunks);
-//         console.log(body.toString());
-//     });
-
-//     res.on("error", function(error) {
-//         console.error(error);
-//     });
-// });
-
-// req.end();

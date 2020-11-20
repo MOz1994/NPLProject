@@ -1,18 +1,14 @@
-// Personal API Key for OpenWeatherMap API
-// let apiKey = process.env.apiKeyw;
-
 // Event listener to add function to existing HTML DOM element
+/* istanbul ignore next */
 document.getElementById('submit').addEventListener('click', performAction);
-// TODO-Async GET
 
-/* Function called by event listener */
 function performAction(event) {
+    let formText = document.getElementById('newsUrl').value
+        /* istanbul ignore next */
+    Client.checkForInput(formText)
 
 
-    // let url = document.getElementById('newsUrl').value;
 
-
-    // let baseURL = 'http://api.meaningcloud.com/sentiment-2.1?key=' + key + '&lang=en&model=general&url=' + url;
     getWeather().then(function(data) {
 
     });
@@ -20,7 +16,7 @@ function performAction(event) {
 
 }
 /* Function to GET Web API Data*/
-const getWeather = async() => { //baseurl inside async
+const getWeather = async() => {
     let url = document.getElementById('newsUrl').value;
 
     const request = await fetch('http://localhost:3000/key');
@@ -37,7 +33,7 @@ const getWeather = async() => { //baseurl inside async
             const data = await res.json();
             /* Function to POST data */
 
-            postData('http://localhost:3000/wData', { polarity: data.score_tag, confidence: data.confidence, subjectivity: data.subjectivity })
+            Client.postData('http://localhost:3000/wData', { polarity: data.score_tag, confidence: data.confidence, subjectivity: data.subjectivity })
                 .then(
                     updateUI()
                 )
@@ -51,25 +47,7 @@ const getWeather = async() => { //baseurl inside async
 
 };
 
-//post method
-const postData = async(url = '', data = {}) => {
-        // console.log(data)
-        const response = await fetch(url, {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-        try {
-            const newData = await response.json();
-            return newData
-        } catch (error) {
-            console.log('error', error);
-        }
-    }
-    /* Function to GET Project Data */
+
 
 const updateUI = async() => {
     const request = await fetch('http://localhost:3000/all');
@@ -77,24 +55,14 @@ const updateUI = async() => {
 
         const allData = await request.json();
         let i = (allData.length - 1);
-        document.getElementById('Polarity').innerHTML = allData[i].polarity;
-        document.getElementById('confidence').innerHTML = allData[i].confidence;
-        document.getElementById('SUBJECTIVE').innerHTML = allData[i].subjectivity;
+        document.getElementById('Polarity').innerHTML = "Polarity: " + allData[i].polarity;
+        document.getElementById('confidence').innerHTML = "Confidence: " + allData[i].confidence;
+        document.getElementById('SUBJECTIVE').innerHTML = "Subjectivity: " + allData[i].subjectivity;
 
     } catch (error) {
         console.log("error", error);
     }
 }
 
-// const getkey = async() => {
-//     const request = await fetch('/key');
-//     try {
 
-//         const allData = await request.json();
-//         return allData.apikey;
-
-//     } catch (error) {
-//         console.log("error", error);
-//     }
-// }
 export { performAction }
