@@ -2,7 +2,6 @@
 *.class
  node_modules 
  dist
-.env
 # Log file
 *.log
 

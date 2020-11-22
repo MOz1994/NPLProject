@@ -32,7 +32,7 @@ const getWeather = async() => {
         try {
             const data = await res.json();
             /* Function to POST data */
-
+            console.log(data)
             Client.postData('http://localhost:3000/wData', { polarity: data.score_tag, confidence: data.confidence, subjectivity: data.subjectivity })
                 .then(
                     updateUI()

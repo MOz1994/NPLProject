@@ -25,11 +25,14 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 // Initialize the main project folder
-app.use(express.static(path.join(__dirname, 'dist')));
+// app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static('dist'));
 
 // designates what port the app will listen to for incoming requests
 app.listen(3000, function() {
         console.log('Example app listening on port 3000')
+            // console.log(`Your API key is ${process.env.apiKeyw}`);
+
     })
     // Initialize all route with a callback function
 app.get('/', function(req, res) {
